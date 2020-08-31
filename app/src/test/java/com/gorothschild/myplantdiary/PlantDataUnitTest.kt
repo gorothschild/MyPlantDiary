@@ -59,8 +59,15 @@ class PlantDataUnitTest {
         allPlants.add(whiteOak)
         allPlantsLiveData.postValue(allPlants)
         // this is what returns the data request
-        every { plantService.fetchPlants(any<String>()) } returns allPlantsLiveData // can hardcode string ex "Redbud"
+        // this is the original
+        // every { plantService.fetchPlants(any<String>()) } returns allPlantsLiveData // can hardcode string ex "Redbud"
+        // *** circleci failed because "any" java.lang.AssertionError: expected:<0> but was:<3> ***
+
         // can make conditional in this ex: if red bud return only red bud etc..
+        every { plantService.fetchPlants(or("Redbud", "Quercus")) } returns allPlantsLiveData
+        // NOTE: *** can chain these above if string is ... then do above, if NOT then return list with 0 items
+        every { plantService.fetchPlants(not (or("Redbud", "Quercus"))) } returns MutableLiveData<ArrayList<Plant>>()
+        // now if requesting junk, it will return nothing, as junk should behave
         mvm.plantService = plantService // on right is the mock above so it returns
     }
 
