@@ -8,6 +8,10 @@ import com.gorothschild.myplantdiary.service.PlantService
 class MainViewModel : ViewModel() {
     var plants: MutableLiveData<ArrayList<Plant>> = MutableLiveData<ArrayList<Plant>>()
     var plantService: PlantService = PlantService()
+
+    init {
+        fetchPlants("dummytext")
+    }
     fun fetchPlants(plantName: String) {
         plants = plantService.fetchPlants(plantName)
     }
