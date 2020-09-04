@@ -1,14 +1,10 @@
 package com.gorothschild.myplantdiary
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import com.gorothschild.myplantdiary.dto.Plant
 import com.gorothschild.myplantdiary.service.PlantService
 import com.gorothschild.myplantdiary.ui.main.MainViewModel
-import io.mockk.confirmVerified
-import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import org.junit.Test
 
 import org.junit.Assert.*
